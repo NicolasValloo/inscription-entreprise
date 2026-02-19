@@ -8,36 +8,43 @@ export async function onRequestGet(context) {
   };
 
   if (!target) {
-    return new Response(JSON.stringify({ error: 'Missing ?url= parameter' }), {
+    return new Response('Missing ?url= parameter', {
       status: 400,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: corsHeaders,
     });
   }
 
   try {
     const u = new URL(target);
     if (!u.hostname.endsWith('opqibi.com')) {
-      return new Response(JSON.stringify({ error: 'Only opqibi.com is allowed' }), {
+      return new Response('Only opqibi.com is allowed', {
         status: 403,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: corsHeaders,
       });
     }
   } catch {
-    return new Response(JSON.stringify({ error: 'Invalid URL' }), {
+    return new Response('Invalid URL', {
       status: 400,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: corsHeaders,
     });
   }
 
   try {
     const response = await fetch(target, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; InscriptionPro/1.0)',
-        'Accept': 'text/html,application/xhtml+xml',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
       },
+      redirect: 'follow',
     });
-    return new Response(await response.text(), {
-      status: response.status,
+
+    const body = await response.text();
+
+    // Return 200 with the body, even if OPQIBI returned 401
+    // Remove WWW-Authenticate header to prevent browser auth popup
+    return new Response(body, {
+      status: 200,
       headers: {
         ...corsHeaders,
         'Content-Type': 'text/html; charset=utf-8',
@@ -45,9 +52,9 @@ export async function onRequestGet(context) {
       },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Fetch failed: ' + err.message }), {
+    return new Response('Fetch failed: ' + err.message, {
       status: 502,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: corsHeaders,
     });
   }
 }
