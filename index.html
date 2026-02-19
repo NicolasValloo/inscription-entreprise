@@ -7,265 +7,311 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f2ed;--bg-card:#fff;--primary:#1a3a5c;--primary-light:#2d5f8a;--accent:#c7552e;--text:#1e1e1e;--text-muted:#6b7280;--border:#ddd6cc;--border-focus:#1a3a5c;--success:#16803c;--success-bg:#ecfdf5;--error:#dc2626;--error-bg:#fef2f2;--opqibi:#0e6e3f;--opqibi-bg:#f0faf5;--shadow-lg:0 10px 40px rgba(0,0,0,.08);--radius:10px;--radius-sm:6px}
+:root{--bg:#f5f2ed;--card:#fff;--pri:#1a3a5c;--pri2:#2d5f8a;--acc:#c7552e;--txt:#1e1e1e;--mut:#6b7280;--bdr:#ddd6cc;--bdf:#1a3a5c;--ok:#16803c;--okbg:#ecfdf5;--err:#dc2626;--errbg:#fef2f2;--oq:#0e6e3f;--oqbg:#f0faf5;--sh:0 10px 40px rgba(0,0,0,.08);--r:10px;--rs:6px}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center}
-body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,58,92,.04) 0%,transparent 70%);pointer-events:none}
-body::after{content:'';position:fixed;bottom:-300px;left:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(199,85,46,.04) 0%,transparent 70%);pointer-events:none}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column;align-items:center}
+body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,58,92,.04),transparent 70%);pointer-events:none}
+body::after{content:'';position:fixed;bottom:-300px;left:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(199,85,46,.04),transparent 70%);pointer-events:none}
 header{width:100%;padding:28px 40px;display:flex;align-items:center;gap:14px}
-.logo-mark{width:38px;height:38px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;font-family:'Playfair Display',serif}
-.logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary)}
+.lm{width:38px;height:38px;background:var(--pri);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;font-family:'Playfair Display',serif}
+.lt{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--pri)}
 main{width:100%;max-width:720px;padding:10px 24px 60px;position:relative;z-index:1}
-.page-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--primary);margin-bottom:6px}
-.page-subtitle{color:var(--text-muted);font-size:15px;margin-bottom:36px;line-height:1.5}
-.card{background:var(--bg-card);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.04)}
-.section-label{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;font-weight:600;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.section-label.opqibi-label{color:var(--opqibi)}
-.field{margin-bottom:20px;position:relative}
-label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px}
-label .req{color:var(--accent);margin-left:2px}
-input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none}
-input:focus{border-color:var(--border-focus);box-shadow:0 0 0 3px rgba(26,58,92,.08)}
-input.af{background:var(--success-bg);border-color:var(--success);animation:fp .5s ease}
-@keyframes fp{0%{transform:scale(1)}50%{transform:scale(1.005)}100%{transform:scale(1)}}
-input[readonly]{background:#f9f9f7;color:var(--text-muted);cursor:default}
+h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--pri);margin-bottom:6px}
+.sub{color:var(--mut);font-size:15px;margin-bottom:36px;line-height:1.5}
+.card{background:var(--card);border-radius:var(--r);padding:36px;box-shadow:var(--sh);border:1px solid rgba(0,0,0,.04)}
+.sl{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;font-weight:600;color:var(--acc);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.sl::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.sl.oql{color:var(--oq)}
+.f{margin-bottom:20px;position:relative}
+label{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
+.rq{color:var(--acc);margin-left:2px}
+input{width:100%;padding:12px 14px;border:1.5px solid var(--bdr);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--txt);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none}
+input:focus{border-color:var(--bdf);box-shadow:0 0 0 3px rgba(26,58,92,.08)}
+input.af{background:var(--okbg);border-color:var(--ok);animation:fp .5s}
+@keyframes fp{0%,100%{transform:scale(1)}50%{transform:scale(1.005)}}
+input[readonly]{background:#f9f9f7;color:var(--mut);cursor:default}
 .sw{position:relative}.sw input{padding-right:44px}
-.si{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
-.sp{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;display:none}
+.si{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--mut);pointer-events:none}
+.sp{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:2px solid var(--bdr);border-top-color:var(--pri);border-radius:50%;animation:spin .7s linear infinite;display:none}
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
-.al{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);max-height:280px;overflow-y:auto;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.1);display:none}
+.al{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--bdr);border-top:none;border-radius:0 0 var(--rs) var(--rs);max-height:280px;overflow-y:auto;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.1);display:none}
 .al.v{display:block}
 .ai{padding:12px 14px;cursor:pointer;border-bottom:1px solid #f3f0eb;transition:background .15s}
-.ai:last-child{border-bottom:none}.ai:hover,.ai.act{background:#f5f2ed}
-.cn{font-weight:600;font-size:14px;margin-bottom:2px;color:var(--primary)}
-.cd{font-size:12px;color:var(--text-muted)}
-.st{background:rgba(26,58,92,.08);padding:1px 6px;border-radius:3px;font-size:11px;font-weight:500;margin-right:6px}
+.ai:last-child{border-bottom:none}.ai:hover,.ai.x{background:#f5f2ed}
+.cn{font-weight:600;font-size:14px;margin-bottom:2px;color:var(--pri)}
+.cd{font-size:12px;color:var(--mut)}
+.tg{background:rgba(26,58,92,.08);padding:1px 6px;border-radius:3px;font-size:11px;font-weight:500;margin-right:6px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 .ra{display:grid;grid-template-columns:1fr 2fr;gap:16px}
-.ib{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:var(--radius-sm);font-size:13px;line-height:1.5;margin-bottom:24px}
-.ib.inf{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
-.ib.suc{background:var(--success-bg);border:1px solid #bbf7d0;color:#166534;display:none}
-.ib.err{background:var(--error-bg);border:1px solid #fecaca;color:var(--error);display:none}
-.ib svg{flex-shrink:0;margin-top:1px}
-.div{height:1px;background:var(--border);margin:28px 0}
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;margin-left:8px;background:rgba(22,128,60,.1);color:var(--success)}
-.srctag{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);margin-top:8px;padding:4px 10px;background:#f9f9f7;border-radius:4px;border:1px solid var(--border)}
-.ob{background:var(--opqibi-bg);border:1.5px solid rgba(14,110,63,.2);border-radius:var(--radius);padding:24px;display:none}
+.bn{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:var(--rs);font-size:13px;line-height:1.5;margin-bottom:24px}
+.bn.i{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.bn.s{background:var(--okbg);border:1px solid #bbf7d0;color:#166534;display:none}
+.bn.e{background:var(--errbg);border:1px solid #fecaca;color:var(--err);display:none}
+.bn svg{flex-shrink:0;margin-top:1px}
+.dv{height:1px;background:var(--bdr);margin:28px 0}
+.bd{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;margin-left:8px;background:rgba(22,128,60,.1);color:var(--ok)}
+.srct{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--mut);margin-top:8px;padding:4px 10px;background:#f9f9f7;border-radius:4px;border:1px solid var(--bdr)}
+.ob{background:var(--oqbg);border:1.5px solid rgba(14,110,63,.2);border-radius:var(--r);padding:24px;display:none}
 .ob.v{display:block}
 .oh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.ol{width:44px;height:44px;background:var(--opqibi);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:10px;letter-spacing:.5px;line-height:1}
-.ot{font-weight:600;font-size:15px;color:var(--opqibi)}
-.os{font-size:12px;color:var(--text-muted)}
-.ocn{display:inline-flex;align-items:center;gap:6px;background:#fff;padding:6px 12px;border-radius:6px;font-size:13px;font-weight:600;color:var(--opqibi);border:1px solid rgba(14,110,63,.2);margin-bottom:16px}
+.ol{width:44px;height:44px;background:var(--oq);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:10px;letter-spacing:.5px;line-height:1;flex-shrink:0}
+.ot{font-weight:600;font-size:15px;color:var(--oq)}
+.os{font-size:12px;color:var(--mut)}
+.oc{display:inline-flex;align-items:center;gap:6px;background:#fff;padding:6px 12px;border-radius:6px;font-size:13px;font-weight:600;color:var(--oq);border:1px solid rgba(14,110,63,.2);margin-bottom:16px}
 .ql{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.qt{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:5px;font-size:12px;font-weight:500;background:#fff;border:1px solid rgba(14,110,63,.15);color:var(--text);transition:all .15s}
-.qt:hover{border-color:var(--opqibi);background:rgba(14,110,63,.04)}
-.qc{font-weight:700;color:var(--opqibi);font-size:11px}
+.qt{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:5px;font-size:12px;font-weight:500;background:#fff;border:1px solid rgba(14,110,63,.15);color:var(--txt);transition:all .15s}
+.qt:hover{border-color:var(--oq);background:rgba(14,110,63,.04)}
+.qc{font-weight:700;color:var(--oq);font-size:11px}
 .qr{background:#fef3c7;color:#92400e;font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;margin-left:2px}
-.onf{padding:14px;text-align:center;font-size:13px;color:var(--text-muted);background:#fff;border-radius:6px;border:1px dashed rgba(14,110,63,.2)}
-.osr{display:flex;align-items:center;gap:8px;padding:14px;font-size:13px;color:var(--opqibi)}
-.ms{width:16px;height:16px;border:2px solid rgba(14,110,63,.2);border-top-color:var(--opqibi);border-radius:50%;animation:spin .7s linear infinite}
-.olk{display:inline-flex;align-items:center;gap:5px;color:var(--opqibi);font-size:12px;font-weight:500;text-decoration:none;margin-top:12px;padding:6px 10px;border-radius:4px;transition:background .15s}
-.olk:hover{background:rgba(14,110,63,.06);text-decoration:underline}
-.sbtn{width:100%;padding:14px 28px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s,transform .1s;margin-top:8px}
-.sbtn:hover{background:var(--primary-light)}.sbtn:active{transform:scale(.995)}
-.terms{text-align:center;font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.5}
-.terms a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}
-.nr{padding:16px;text-align:center;color:var(--text-muted);font-size:13px}
-@media(max-width:640px){main{padding:10px 16px 40px}.card{padding:24px 20px}.row,.r3,.ra{grid-template-columns:1fr}.page-title{font-size:26px}header{padding:20px}}
+.onf{padding:14px;text-align:center;font-size:13px;color:var(--mut);background:#fff;border-radius:6px;border:1px dashed rgba(14,110,63,.2)}
+.osr{display:flex;align-items:center;gap:8px;padding:14px;font-size:13px;color:var(--oq)}
+.ms{width:16px;height:16px;border:2px solid rgba(14,110,63,.2);border-top-color:var(--oq);border-radius:50%;animation:spin .7s linear infinite}
+.lk{display:inline-flex;align-items:center;gap:5px;color:var(--oq);font-size:12px;font-weight:500;text-decoration:none;margin-top:12px;padding:6px 10px;border-radius:4px;transition:background .15s}
+.lk:hover{background:rgba(14,110,63,.06);text-decoration:underline}
+.sb{width:100%;padding:14px 28px;background:var(--pri);color:#fff;border:none;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s,transform .1s;margin-top:8px}
+.sb:hover{background:var(--pri2)}.sb:active{transform:scale(.995)}
+.tm{text-align:center;font-size:12px;color:var(--mut);margin-top:16px;line-height:1.5}
+.tm a{color:var(--pri);text-decoration:underline;text-underline-offset:2px}
+.nr{padding:16px;text-align:center;color:var(--mut);font-size:13px}
+@media(max-width:640px){main{padding:10px 16px 40px}.card{padding:24px 20px}.row,.r3,.ra{grid-template-columns:1fr}h1{font-size:26px}header{padding:20px}}
 </style>
 </head>
 <body>
-<header><div class="logo-mark">EP</div><div class="logo-text">Espace Pro</div></header>
+<header><div class="lm">EP</div><div class="lt">Espace Pro</div></header>
 <main>
-<h1 class="page-title">Créer votre compte</h1>
-<p class="page-subtitle">Recherchez votre entreprise pour préremplir automatiquement vos informations et vérifier vos certifications OPQIBI.</p>
+<h1>Créer votre compte</h1>
+<p class="sub">Recherchez votre entreprise pour préremplir automatiquement vos informations et vérifier vos certifications OPQIBI.</p>
 <div class="card">
 
-<!-- SEARCH -->
-<div class="section-label">Votre entreprise</div>
-<div class="ib inf" id="infB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>Saisissez le nom, le SIRET ou le SIREN. Les données seront récupérées automatiquement.</span></div>
-<div class="ib suc" id="sucB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span id="sucT"></span></div>
-<div class="ib err" id="errB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span id="errT"></span></div>
+<div class="sl">Votre entreprise</div>
+<div class="bn i" id="iB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>Saisissez le nom, le SIRET ou le SIREN. Les données seront récupérées automatiquement.</span></div>
+<div class="bn s" id="sB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span id="sT"></span></div>
+<div class="bn e" id="eB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span id="eT"></span></div>
 
-<div class="field"><label for="q">Nom de l'entreprise ou SIRET <span class="req">*</span></label>
+<div class="f"><label>Nom de l'entreprise ou SIRET <span class="rq">*</span></label>
 <div class="sw"><input type="text" id="q" placeholder="Ex : Manergy, 328 581 822..." autocomplete="off">
-<svg class="si" id="sIc" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-<div class="sp" id="sp"></div><div class="al" id="acl"></div></div>
-<div class="srctag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Source : API Sirene — données officielles INSEE</div></div>
+<svg class="si" id="sI" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+<div class="sp" id="sp"></div><div class="al" id="ac"></div></div>
+<div class="srct"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Source : API Sirene — données officielles INSEE</div></div>
 
-<div class="div"></div>
-
-<!-- LEGAL -->
-<div class="section-label">Informations légales <span class="badge" id="ab" style="display:none">✓ Auto-rempli</span></div>
-<div class="field"><label>Dénomination sociale</label><input type="text" id="denom" readonly placeholder="—"></div>
+<div class="dv"></div>
+<div class="sl">Informations légales <span class="bd" id="b1" style="display:none">✓ Auto-rempli</span></div>
+<div class="f"><label>Dénomination sociale</label><input id="denom" readonly placeholder="—"></div>
 <div class="r3">
-<div class="field"><label>SIRET</label><input type="text" id="siret" readonly placeholder="—"></div>
-<div class="field"><label>SIREN</label><input type="text" id="siren" readonly placeholder="—"></div>
-<div class="field"><label>N° TVA intracommunautaire</label><input type="text" id="tva" readonly placeholder="—"></div>
+<div class="f"><label>SIRET</label><input id="siret" readonly placeholder="—"></div>
+<div class="f"><label>SIREN</label><input id="siren" readonly placeholder="—"></div>
+<div class="f"><label>N° TVA intracommunautaire</label><input id="tva" readonly placeholder="—"></div>
 </div>
 <div class="r3">
-<div class="field"><label>Code NAF / APE</label><input type="text" id="naf" readonly placeholder="—"></div>
-<div class="field"><label>Forme juridique</label><input type="text" id="fj" readonly placeholder="—"></div>
-<div class="field"><label>Date de création</label><input type="text" id="dc" readonly placeholder="—"></div>
+<div class="f"><label>Code NAF / APE</label><input id="naf" readonly placeholder="—"></div>
+<div class="f"><label>Forme juridique</label><input id="fj" readonly placeholder="—"></div>
+<div class="f"><label>Date de création</label><input id="dc" readonly placeholder="—"></div>
 </div>
 
-<div class="div"></div>
-
-<!-- ADDRESS -->
-<div class="section-label">Adresse du siège <span class="badge" id="ab2" style="display:none">✓ Auto-rempli</span></div>
-<div class="field"><label>Adresse</label><input type="text" id="addr" readonly placeholder="—"></div>
+<div class="dv"></div>
+<div class="sl">Adresse du siège <span class="bd" id="b2" style="display:none">✓ Auto-rempli</span></div>
+<div class="f"><label>Adresse</label><input id="adr" readonly placeholder="—"></div>
 <div class="ra">
-<div class="field"><label>Code postal</label><input type="text" id="cp" readonly placeholder="—"></div>
-<div class="field"><label>Ville</label><input type="text" id="ville" readonly placeholder="—"></div>
+<div class="f"><label>Code postal</label><input id="cp" readonly placeholder="—"></div>
+<div class="f"><label>Ville</label><input id="vil" readonly placeholder="—"></div>
 </div>
 
-<div class="div"></div>
-
-<!-- OPQIBI -->
-<div class="section-label opqibi-label">Certifications OPQIBI</div>
+<div class="dv"></div>
+<div class="sl oql">Certifications OPQIBI</div>
 <div id="oz"><div class="onf"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sélectionnez une entreprise pour vérifier ses certifications OPQIBI</div></div>
 
-<div class="div"></div>
-
-<!-- CONTACT -->
-<div class="section-label">Vos coordonnées</div>
+<div class="dv"></div>
+<div class="sl">Vos coordonnées</div>
 <div class="row">
-<div class="field"><label>Prénom <span class="req">*</span></label><input type="text" id="prenom" placeholder="Jean"></div>
-<div class="field"><label>Nom <span class="req">*</span></label><input type="text" id="nom" placeholder="Dupont"></div>
+<div class="f"><label>Prénom <span class="rq">*</span></label><input id="prenom" placeholder="Jean"></div>
+<div class="f"><label>Nom <span class="rq">*</span></label><input id="nom" placeholder="Dupont"></div>
 </div>
-<div class="field"><label>Adresse e-mail <span class="req">*</span></label><input type="email" id="email" placeholder="jean.dupont@entreprise.fr"></div>
-<div class="field"><label>Téléphone</label><input type="tel" id="tel" placeholder="06 12 34 56 78"></div>
-<div class="field"><label>Mot de passe <span class="req">*</span></label><input type="password" id="pwd" placeholder="Minimum 8 caractères"></div>
+<div class="f"><label>Adresse e-mail <span class="rq">*</span></label><input type="email" id="email" placeholder="jean.dupont@entreprise.fr"></div>
+<div class="f"><label>Téléphone</label><input type="tel" id="tel" placeholder="06 12 34 56 78"></div>
+<div class="f"><label>Mot de passe <span class="rq">*</span></label><input type="password" id="pwd" placeholder="Minimum 8 caractères"></div>
 
-<button class="sbtn" onclick="doSubmit()">Créer mon compte</button>
-<p class="terms">En vous inscrivant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
+<button class="sb" onclick="doSubmit()">Créer mon compte</button>
+<p class="tm">En vous inscrivant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
 </div>
 </main>
 
 <script>
 const E=id=>document.getElementById(id);
-let dt,ai=-1,cr=[];
+let dt,aidx=-1,cr=[];
 
-// --- SIRENE SEARCH ---
+/* ══════════════════════════════════════
+   SIRENE — Recherche entreprises
+   ══════════════════════════════════════ */
 async function doSearch(q){
-  if(!q||q.length<2){E('acl').classList.remove('v');return}
-  E('sp').style.display='block';E('sIc').style.display='none';E('errB').style.display='none';
+  if(!q||q.length<2){E('ac').classList.remove('v');return}
+  E('sp').style.display='block';E('sI').style.display='none';E('eB').style.display='none';
   try{
     const r=await fetch('https://recherche-entreprises.api.gouv.fr/search?q='+encodeURIComponent(q)+'&page=1&per_page=8');
     if(!r.ok)throw 0;cr=(await r.json()).results||[];showAC(cr);
-  }catch{E('acl').innerHTML='<div class="nr">Erreur de connexion.</div>';E('acl').classList.add('v')}
-  finally{E('sp').style.display='none';E('sIc').style.display='block'}
+  }catch{E('ac').innerHTML='<div class="nr">Erreur de connexion.</div>';E('ac').classList.add('v')}
+  finally{E('sp').style.display='none';E('sI').style.display='block'}
 }
 
 function showAC(res){
-  const l=E('acl');
+  const l=E('ac');
   if(!res.length){l.innerHTML='<div class="nr">Aucune entreprise trouvée.</div>';l.classList.add('v');return}
   l.innerHTML=res.map((r,i)=>{
-    const s=r.siege||{},n=r.nom_complet||r.nom_raison_sociale||'—',loc=[s.code_postal,s.libelle_commune].filter(Boolean).join(' ');
-    return '<div class="ai" onclick="pick('+i+')"><div class="cn">'+hl(n,E('q').value)+'</div><div class="cd"><span class="st">SIRET '+(s.siret||'—')+'</span>'+loc+'</div></div>';
+    const s=r.siege||{},n=r.nom_complet||r.nom_raison_sociale||'—',
+    lo=[s.code_postal,s.libelle_commune].filter(Boolean).join(' ');
+    return'<div class="ai" onclick="pick('+i+')"><div class="cn">'+hl(n,E('q').value)+'</div><div class="cd"><span class="tg">SIRET '+(s.siret||'—')+'</span>'+lo+'</div></div>'
   }).join('');
-  l.classList.add('v');ai=-1;
+  l.classList.add('v');aidx=-1;
 }
 
 function hl(t,q){return q?t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<strong>$1</strong>'):t}
 
-// --- TVA ---
-function tva(siren){
-  if(!siren||siren.length!==9)return '—';
-  const k=(12+3*(parseInt(siren,10)%97))%97;
-  return 'FR '+String(k).padStart(2,'0')+' '+siren;
+/* ══════════════════════════════════════
+   TVA intracommunautaire (calcul SIREN)
+   ══════════════════════════════════════ */
+function mkTVA(s){
+  if(!s||s.length!==9)return'—';
+  const k=(12+3*(parseInt(s,10)%97))%97;
+  return'FR '+String(k).padStart(2,'0')+' '+s;
 }
 
-// --- FORME JURIDIQUE ---
+/* ══════════════════════════════════════
+   Forme juridique
+   ══════════════════════════════════════ */
 const FJ={'1000':'Entrepreneur individuel','5410':'SARL','5499':'EURL','5505':'SA','5510':'SA','5599':'SA à directoire','5710':'SAS','5720':'SASU','6540':'SCI','6599':'Société civile','9220':'Association déclarée','9221':"Association reconnue d'utilité publique"};
-function gfj(code){
-  if(!code)return '—';if(FJ[code])return FJ[code]+' ('+code+')';const c=+code;
-  if(c>=1000&&c<2000)return 'Entrepreneur individuel ('+code+')';
-  if(c>=5410&&c<=5499)return 'SARL ('+code+')';if(c>=5500&&c<=5599)return 'SA ('+code+')';
-  if(c>=5700&&c<=5720)return 'SAS ('+code+')';if(c>=6500&&c<=6599)return 'Société civile ('+code+')';
-  if(c>=9200&&c<=9299)return 'Association ('+code+')';if(c>=7000&&c<=7999)return 'Personne morale de droit public ('+code+')';
-  return 'Code '+code;
+function gfj(c){
+  if(!c)return'—';if(FJ[c])return FJ[c]+' ('+c+')';const n=+c;
+  if(n>=1000&&n<2000)return'Entrepreneur individuel ('+c+')';
+  if(n>=5410&&n<=5499)return'SARL ('+c+')';if(n>=5500&&n<=5599)return'SA ('+c+')';
+  if(n>=5700&&n<=5720)return'SAS ('+c+')';if(n>=6500&&n<=6599)return'Société civile ('+c+')';
+  if(n>=9200&&n<=9299)return'Association ('+c+')';if(n>=7000&&n<=7999)return'Pers. morale de droit public ('+c+')';
+  return'Code '+c;
 }
 
-// --- OPQIBI ---
+/* ══════════════════════════════════════
+   OPQIBI — via /api/opqibi (même domaine)
+   ══════════════════════════════════════ */
+async function fetchOP(targetUrl){
+  // Appel au proxy local (Cloudflare Pages Function)
+  const r=await fetch('/api/opqibi?url='+encodeURIComponent(targetUrl));
+  if(!r.ok)throw new Error('Proxy returned '+r.status);
+  return await r.text();
+}
+
 async function findOPQIBI(siren,nom){
   const z=E('oz');
-  z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">Vérification OPQIBI</div><div class="os">Recherche des certifications...</div></div></div><div class="osr"><div class="ms"></div> Recherche en cours sur l\'annuaire OPQIBI...</div></div>';
+  z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">Vérification OPQIBI</div><div class="os">Recherche des certifications...</div></div></div><div class="osr"><div class="ms"></div> Interrogation de l\'annuaire OPQIBI...</div></div>';
+
   try{
-    const px=u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u);
-    const html=await(await fetch(px('https://www.opqibi.com/recherche-resultat?Siren='+siren))).text();
+    // Étape 1 : Recherche par SIREN
+    const html=await fetchOP('https://www.opqibi.com/recherche-resultat?Siren='+siren);
     const doc=new DOMParser().parseFromString(html,'text/html');
     const lks=doc.querySelectorAll('a[href*="/fiche/"]');
-    if(!lks.length){opRes('none',nom,siren);return}
+    if(!lks.length){opR('none',nom,siren);return}
+
     const fid=lks[0].getAttribute('href').match(/\/fiche\/(\d+)/)?.[1];
-    if(!fid){opRes('none',nom,siren);return}
-    const fh=await(await fetch(px('https://www.opqibi.com/fiche/'+fid))).text();
+    if(!fid){opR('none',nom,siren);return}
+
+    // Étape 2 : Récupération de la fiche détaillée
+    const fh=await fetchOP('https://www.opqibi.com/fiche/'+fid);
     const fd=new DOMParser().parseFromString(fh,'text/html');
+
+    // Numéro de certificat
     const cm=fd.body.textContent.match(/(\d{2}\s+\d{2}\s+\d{4})/);
     const cn=cm?cm[1].trim():'';
+
+    // Qualifications depuis le tableau
     const qs=[];
     fd.querySelectorAll('table tr').forEach(r=>{
       const c=r.querySelectorAll('td');
-      if(c.length>=2){const co=c[0]?.textContent?.trim(),lb=c[1]?.textContent?.trim();
-      if(co&&/^\d{4}$/.test(co)){qs.push({co,lb,rge:(lb+(c[1]?.innerHTML||'')).toLowerCase().includes('rge')})}}
+      if(c.length>=2){
+        const co=c[0]?.textContent?.trim(),lb=c[1]?.textContent?.trim();
+        if(co&&/^\d{4}$/.test(co))
+          qs.push({co,lb,rge:(lb+(c[1]?.innerHTML||'')).toLowerCase().includes('rge')});
+      }
     });
-    if(qs.length)opRes('found',nom,siren,fid,cn,qs);else opRes('partial',nom,siren,fid,cn);
-  }catch(e){console.error(e);opRes('error',nom,siren)}
+
+    if(qs.length) opR('found',nom,siren,fid,cn,qs);
+    else opR('partial',nom,siren,fid,cn);
+
+  }catch(e){console.error('OPQIBI:',e);opR('error',nom,siren)}
 }
 
-function opRes(type,nom,siren,fid,cn,qs){
+/* ── Affichage résultat OPQIBI ── */
+function opR(type,nom,siren,fid,cn,qs){
   const z=E('oz');
-  const es='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-  const ss='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
-  const ct=cn?'<div class="ocn">'+ss+'Certificat n° '+cn+'</div>':'';
+  const ext='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  const shd='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+  const ct=cn?'<div class="oc">'+shd+'Certificat n° '+cn+'</div>':'';
+
   if(type==='found'){
     const qh=qs.map(q=>'<div class="qt"><span class="qc">'+q.co+'</span>'+q.lb+(q.rge?'<span class="qr">RGE</span>':'')+'</div>').join('');
-    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">✓ Entreprise certifiée OPQIBI</div><div class="os">'+nom+'</div></div></div>'+ct+'<div style="font-size:13px;font-weight:500;margin-bottom:4px">'+qs.length+' qualification(s) :</div><div class="ql">'+qh+'</div><a href="https://www.opqibi.com/fiche/'+fid+'" target="_blank" rel="noopener" class="olk">'+es+'Voir la fiche complète sur opqibi.com</a></div>';
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">✓ Entreprise certifiée OPQIBI</div><div class="os">'+nom+'</div></div></div>'+ct+'<div style="font-size:13px;font-weight:500;margin-bottom:4px">'+qs.length+' qualification(s) :</div><div class="ql">'+qh+'</div><a href="https://www.opqibi.com/fiche/'+fid+'" target="_blank" rel="noopener" class="lk">'+ext+'Voir la fiche complète sur opqibi.com</a></div>';
   }else if(type==='partial'){
-    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">✓ Entreprise référencée OPQIBI</div><div class="os">'+nom+'</div></div></div>'+ct+'<p style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Consultez la fiche pour les qualifications détaillées.</p><a href="https://www.opqibi.com/fiche/'+fid+'" target="_blank" rel="noopener" class="olk">'+es+'Voir la fiche complète sur opqibi.com</a></div>';
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">✓ Entreprise référencée OPQIBI</div><div class="os">'+nom+'</div></div></div>'+ct+'<p style="font-size:13px;color:var(--mut);margin-bottom:8px">Consultez la fiche pour les qualifications détaillées.</p><a href="https://www.opqibi.com/fiche/'+fid+'" target="_blank" rel="noopener" class="lk">'+ext+'Voir la fiche complète</a></div>';
   }else if(type==='none'){
-    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol" style="background:#94a3b8">OPQIBI</div><div><div class="ot" style="color:var(--text-muted)">Aucune certification OPQIBI</div><div class="os">'+nom+' (SIREN: '+siren+')</div></div></div><p style="font-size:13px;color:var(--text-muted)">Cette entreprise n\'est pas référencée dans l\'annuaire OPQIBI.</p><a href="https://www.opqibi.com/recherche-plus" target="_blank" rel="noopener" class="olk" style="color:var(--text-muted)">'+es+'Rechercher manuellement sur opqibi.com</a></div>';
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol" style="background:#94a3b8">OPQIBI</div><div><div class="ot" style="color:var(--mut)">Aucune certification OPQIBI</div><div class="os">'+nom+' (SIREN: '+siren+')</div></div></div><p style="font-size:13px;color:var(--mut)">Cette entreprise n\'est pas référencée dans l\'annuaire OPQIBI.</p><a href="https://www.opqibi.com/recherche-plus" target="_blank" rel="noopener" class="lk" style="color:var(--mut)">'+ext+'Rechercher sur opqibi.com</a></div>';
   }else{
-    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol" style="background:#f59e0b">OPQIBI</div><div><div class="ot" style="color:#b45309">Vérification impossible</div><div class="os">Le site OPQIBI n\'a pas pu être interrogé.</div></div></div><p style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Vérifiez manuellement :</p><a href="https://www.opqibi.com/recherche-plus" target="_blank" rel="noopener" class="olk" style="color:#b45309">'+es+'Rechercher sur opqibi.com (SIREN: '+siren+')</a></div>';
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol" style="background:#f59e0b">OPQIBI</div><div><div class="ot" style="color:#b45309">Vérification impossible</div><div class="os">L\'annuaire OPQIBI n\'a pas pu être interrogé.</div></div></div><p style="font-size:13px;color:var(--mut);margin-bottom:8px">Vérifiez manuellement :</p><a href="https://www.opqibi.com/recherche-plus" target="_blank" rel="noopener" class="lk" style="color:#b45309">'+ext+'Rechercher sur opqibi.com (SIREN : '+siren+')</a></div>';
   }
 }
 
-// --- SELECT ---
+/* ══════════════════════════════════════
+   Sélection & remplissage auto
+   ══════════════════════════════════════ */
 function pick(i){
   const r=cr[i];if(!r)return;
   const s=r.siege||{},nom=r.nom_complet||r.nom_raison_sociale||'',sir=r.siren||'';
-  E('q').value=nom;E('acl').classList.remove('v');
-  const adr=[s.numero_voie,s.type_voie,s.libelle_voie,s.complement_adresse].filter(Boolean).join(' ')||s.geo_adresse||'—';
+  E('q').value=nom;E('ac').classList.remove('v');
+
+  const ad=[s.numero_voie,s.type_voie,s.libelle_voie,s.complement_adresse].filter(Boolean).join(' ')||s.geo_adresse||'—';
   const nc=s.activite_principale||r.activite_principale||'',nl=s.libelle_activite_principale||'';
-  const dcv=r.date_creation||s.date_creation||'';
-  const flds={denom:nom,siret:s.siret||'—',siren:sir||'—',tva:tva(sir),naf:nc?(nl?nc+' — '+nl:nc):'—',fj:gfj(r.nature_juridique),dc:dcv?new Date(dcv).toLocaleDateString('fr-FR'):'—',addr:adr,cp:s.code_postal||'—',ville:s.libelle_commune||'—'};
+  const dv=r.date_creation||s.date_creation||'';
+
+  const flds={
+    denom:nom, siret:s.siret||'—', siren:sir||'—', tva:mkTVA(sir),
+    naf:nc?(nl?nc+' — '+nl:nc):'—', fj:gfj(r.nature_juridique),
+    dc:dv?new Date(dv).toLocaleDateString('fr-FR'):'—',
+    adr:ad, cp:s.code_postal||'—', vil:s.libelle_commune||'—'
+  };
+
   let d=0;
-  for(const[id,v]of Object.entries(flds)){setTimeout(()=>{const el=E(id);el.value=v;el.classList.add('af');setTimeout(()=>el.classList.remove('af'),1500)},d);d+=60}
-  E('infB').style.display='none';E('errB').style.display='none';
-  E('sucB').style.display='flex';E('sucT').textContent='✓ '+nom+' — Informations préremplies avec succès.';
-  E('ab').style.display='inline-flex';E('ab2').style.display='inline-flex';
+  for(const[id,v]of Object.entries(flds)){
+    setTimeout(()=>{const el=E(id);el.value=v;el.classList.add('af');setTimeout(()=>el.classList.remove('af'),1500)},d);d+=60;
+  }
+
+  E('iB').style.display='none';E('eB').style.display='none';
+  E('sB').style.display='flex';E('sT').textContent='✓ '+nom+' — Informations préremplies avec succès.';
+  E('b1').style.display='inline-flex';E('b2').style.display='inline-flex';
+
   if(sir)findOPQIBI(sir,nom);
 }
 
-// --- EVENTS ---
-E('q').addEventListener('input',e=>{const v=e.target.value.trim();clearTimeout(dt);if(v.length<2){E('acl').classList.remove('v');return}dt=setTimeout(()=>doSearch(v),300)});
-E('q').addEventListener('keydown',e=>{
-  const items=E('acl').querySelectorAll('.ai');if(!items.length)return;
-  if(e.key==='ArrowDown'){e.preventDefault();ai=Math.min(ai+1,items.length-1);uai(items)}
-  else if(e.key==='ArrowUp'){e.preventDefault();ai=Math.max(ai-1,0);uai(items)}
-  else if(e.key==='Enter'&&ai>=0){e.preventDefault();pick(ai)}
-  else if(e.key==='Escape')E('acl').classList.remove('v');
+/* ══════════════════════════════════════
+   Événements
+   ══════════════════════════════════════ */
+E('q').addEventListener('input',e=>{
+  const v=e.target.value.trim();clearTimeout(dt);
+  if(v.length<2){E('ac').classList.remove('v');return}
+  dt=setTimeout(()=>doSearch(v),300);
 });
-function uai(items){items.forEach(i=>i.classList.remove('act'));if(items[ai]){items[ai].classList.add('act');items[ai].scrollIntoView({block:'nearest'})}}
-document.addEventListener('click',e=>{if(!e.target.closest('.sw'))E('acl').classList.remove('v')});
+
+E('q').addEventListener('keydown',e=>{
+  const it=E('ac').querySelectorAll('.ai');if(!it.length)return;
+  if(e.key==='ArrowDown'){e.preventDefault();aidx=Math.min(aidx+1,it.length-1);ua(it)}
+  else if(e.key==='ArrowUp'){e.preventDefault();aidx=Math.max(aidx-1,0);ua(it)}
+  else if(e.key==='Enter'&&aidx>=0){e.preventDefault();pick(aidx)}
+  else if(e.key==='Escape')E('ac').classList.remove('v');
+});
+
+function ua(it){it.forEach(i=>i.classList.remove('x'));if(it[aidx]){it[aidx].classList.add('x');it[aidx].scrollIntoView({block:'nearest'})}}
+
+document.addEventListener('click',e=>{if(!e.target.closest('.sw'))E('ac').classList.remove('v')});
 
 function doSubmit(){
-  const req=['q','prenom','nom','email','pwd'];let ok=true;
-  for(const id of req){const el=E(id);if(!el.value.trim()){el.style.borderColor='var(--error)';ok=false;setTimeout(()=>el.style.borderColor='',2000)}}
-  if(!ok){E('errB').style.display='flex';E('errT').textContent='Veuillez remplir tous les champs obligatoires.';return}
+  const rq=['q','prenom','nom','email','pwd'];let ok=true;
+  for(const id of rq){const el=E(id);if(!el.value.trim()){el.style.borderColor='var(--err)';ok=false;setTimeout(()=>el.style.borderColor='',2000)}}
+  if(!ok){E('eB').style.display='flex';E('eT').textContent='Veuillez remplir tous les champs obligatoires.';return}
   alert('Inscription envoyée avec succès ! (démo)');
 }
 </script>

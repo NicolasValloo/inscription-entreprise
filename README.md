@@ -1,93 +1,103 @@
-# 🏢 Inscription Entreprise — Recherche automatique Sirene
+# Inscription Entreprise — Sirene + TVA + OPQIBI
 
-Formulaire d'inscription professionnel qui recherche automatiquement les informations d'une entreprise française (SIRET, NAF/APE, adresse, forme juridique) via l'API officielle Sirene du gouvernement.
+Formulaire d'inscription pro avec recherche automatique d'entreprise, calcul de TVA et vérification des certifications OPQIBI.
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
-- **Recherche en temps réel** par nom d'entreprise, SIRET ou SIREN
-- **Préremplissage automatique** : dénomination, SIRET, SIREN, code NAF/APE, forme juridique, adresse complète
-- **Source officielle** : API Recherche d'entreprises (data.gouv.fr / INSEE)
-- **Aucune clé API nécessaire** — l'API est publique et gratuite
-- **100% statique** — un seul fichier HTML, aucun serveur requis
-- **Responsive** — fonctionne sur mobile, tablette et desktop
+- **Recherche en temps réel** par nom, SIRET ou SIREN
+- **Préremplissage automatique** : dénomination, SIRET, SIREN, NAF/APE, forme juridique, adresse
+- **N° TVA intracommunautaire** calculé depuis le SIREN
+- **Certifications OPQIBI** : détecte automatiquement si l'entreprise est certifiée et affiche ses qualifications
+- 100% gratuit, aucune clé API requise
 
-## 🚀 Mettre en ligne sur GitHub Pages
-
-### Étape 1 : Créer un dépôt GitHub
-
-1. Connectez-vous sur [github.com](https://github.com)
-2. Cliquez sur **"New repository"** (bouton vert "+" en haut à droite)
-3. Nommez-le par exemple `inscription-entreprise`
-4. Cochez **"Public"**
-5. Cochez **"Add a README file"**
-6. Cliquez sur **"Create repository"**
-
-### Étape 2 : Ajouter le fichier
-
-1. Dans votre dépôt, cliquez sur **"Add file"** → **"Upload files"**
-2. Glissez-déposez le fichier `index.html`
-3. Cliquez sur **"Commit changes"**
-
-### Étape 3 : Activer GitHub Pages
-
-1. Allez dans **Settings** (onglet en haut du dépôt)
-2. Dans le menu de gauche, cliquez sur **Pages**
-3. Sous **"Source"**, sélectionnez **"Deploy from a branch"**
-4. Choisissez la branche **main** et le dossier **/ (root)**
-5. Cliquez sur **Save**
-
-### Étape 4 : Accéder à votre site
-
-Après 1-2 minutes, votre site sera accessible à :
+## Structure du projet
 
 ```
-https://VOTRE-NOM-GITHUB.github.io/inscription-entreprise/
+├── index.html                    ← Votre site (page d'inscription)
+├── functions/
+│   └── api/
+│       └── opqibi.js             ← Proxy serverless pour interroger opqibi.com
+└── README.md
 ```
 
-Remplacez `VOTRE-NOM-GITHUB` par votre nom d'utilisateur GitHub.
+## Déploiement (10 minutes, tout gratuit)
 
-## 🔧 Personnalisation
+Cloudflare Pages héberge votre site ET exécute le proxy OPQIBI automatiquement — tout est intégré, pas de configuration séparée.
 
-### Changer le nom et le logo
+### Étape 1 — Créer le dépôt GitHub
 
-Dans le fichier `index.html`, recherchez :
-```html
-<div class="logo-mark">EP</div>
-<div class="logo-text">Espace Pro</div>
+1. Allez sur [github.com/new](https://github.com/new)
+2. Nommez le dépôt (ex : `inscription-pro`)
+3. Cochez **Public** puis **Create repository**
+4. Cliquez **Add file → Upload files**
+5. Uploadez les **3 éléments** :
+   - `index.html`
+   - Le **dossier** `functions/` (avec `api/opqibi.js` dedans)
+   - `README.md`
+6. Commit
+
+> **Important** : la structure des dossiers doit être exacte. Le fichier `functions/api/opqibi.js` crée automatiquement la route `/api/opqibi` sur Cloudflare.
+
+### Étape 2 — Connecter à Cloudflare Pages
+
+1. Créez un compte gratuit sur [dash.cloudflare.com](https://dash.cloudflare.com) si besoin
+2. Menu gauche → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
+3. Autorisez Cloudflare à accéder à votre GitHub
+4. Sélectionnez votre dépôt `inscription-pro`
+5. Configuration du build :
+   - **Framework preset** : `None`
+   - **Build command** : *(laisser vide)*
+   - **Build output directory** : `/` (ou laisser vide)
+6. Cliquez **Save and Deploy**
+
+### Étape 3 — C'est en ligne !
+
+Après 1-2 minutes, votre site est accessible à :
+
 ```
-Remplacez par le nom de votre service.
-
-### Changer les couleurs
-
-Modifiez les variables CSS en haut du fichier :
-```css
-:root {
-    --primary: #1a3a5c;     /* Couleur principale */
-    --accent: #c7552e;      /* Couleur d'accent */
-    --bg: #f5f2ed;          /* Fond de page */
-}
+https://inscription-pro.pages.dev
 ```
 
-### Ajouter un vrai backend
+(Vous pourrez ajouter votre propre nom de domaine dans les paramètres Cloudflare Pages.)
 
-Le formulaire actuel est une démo frontend. Pour un vrai système d'inscription, vous pouvez connecter le bouton "Créer mon compte" à :
-- **Firebase** (gratuit) — pour stocker les inscriptions
-- **Supabase** (gratuit) — alternative open source
-- **Formspree / Netlify Forms** — pour recevoir les données par email
-- Votre propre API backend
+### Déploiement automatique
 
-## 📡 À propos de l'API utilisée
+À chaque **push** sur GitHub, Cloudflare redéploie automatiquement votre site. Modifiez `index.html` sur GitHub → le site se met à jour en ~30 secondes.
 
-Ce projet utilise l'API **Recherche d'entreprises** du gouvernement français :
+## Comment ça marche
 
-- **URL** : `https://recherche-entreprises.api.gouv.fr/search`
-- **Documentation** : [api.gouv.fr/les-api/api-recherche-entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises)
-- **Gratuite**, sans inscription, sans clé API
-- **Données source** : base Sirene de l'INSEE
-- **Pas de limite stricte** mais un fair-use est attendu
+| Donnée | Source | Méthode |
+|--------|--------|---------|
+| Nom, SIRET, SIREN, NAF, adresse | API Sirene (INSEE) | Appel API direct (gratuit, sans clé) |
+| N° TVA intracommunautaire | Calcul local | Formule officielle `FR + clé + SIREN` |
+| Forme juridique | API Sirene | Code catégorie juridique → libellé |
+| Certifications OPQIBI | opqibi.com | Proxy serverless → parsing HTML |
 
-> ⚠️ Ce n'est **pas** une IA qui "cherche sur internet". C'est un appel direct à la base de données officielle du gouvernement — c'est plus fiable, plus rapide et totalement gratuit.
+### Pourquoi un proxy pour OPQIBI ?
 
-## 📄 Licence
+L'OPQIBI n'offre pas d'API publique. Leur site bloque les requêtes cross-origin (CORS). Le fichier `functions/api/opqibi.js` agit comme intermédiaire :
 
-Libre d'utilisation. Adaptez-le à vos besoins.
+```
+Navigateur → /api/opqibi?url=... → Cloudflare Function → opqibi.com → réponse HTML
+```
+
+C'est sécurisé : le proxy n'accepte que les requêtes vers `opqibi.com`.
+
+## Personnalisation
+
+**Logo et nom** : modifiez les éléments `<div class="lm">EP</div>` et `<div class="lt">Espace Pro</div>`
+
+**Couleurs** : variables CSS dans `:root` — `--pri` (principal), `--acc` (accent), `--bg` (fond)
+
+**Backend d'inscription** : le bouton "Créer mon compte" lance un `alert()` de démo. Connectez-le à Firebase, Supabase, ou votre propre API.
+
+## Limites
+
+- L'API Sirene est gratuite mais en fair-use (pas de limite stricte documentée)
+- Cloudflare Pages Free = 100 000 requêtes Functions/jour
+- Le parsing OPQIBI dépend de la structure HTML de leur site (peut casser si ils refont leur site)
+- Le N° TVA est calculé mathématiquement — il est correct pour les entreprises françaises assujetties
+
+## Licence
+
+Libre d'utilisation et de modification.
