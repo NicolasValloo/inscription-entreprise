@@ -7,700 +7,267 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f5f2ed;
-    --bg-card: #ffffff;
-    --primary: #1a3a5c;
-    --primary-light: #2d5f8a;
-    --accent: #c7552e;
-    --accent-light: #e8714a;
-    --text: #1e1e1e;
-    --text-muted: #6b7280;
-    --border: #ddd6cc;
-    --border-focus: #1a3a5c;
-    --success: #16803c;
-    --success-bg: #ecfdf5;
-    --error: #dc2626;
-    --error-bg: #fef2f2;
-    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-lg: 0 10px 40px rgba(0,0,0,0.08);
-    --radius: 10px;
-    --radius-sm: 6px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px;
-    right: -200px;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(26,58,92,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -300px;
-    left: -200px;
-    width: 700px;
-    height: 700px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(199,85,46,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  header {
-    width: 100%;
-    padding: 28px 40px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .logo-mark {
-    width: 38px; height: 38px;
-    background: var(--primary);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 16px;
-    letter-spacing: -0.5px;
-    font-family: 'Playfair Display', serif;
-  }
-  .logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px; font-weight: 700;
-    color: var(--primary);
-  }
-
-  main {
-    width: 100%;
-    max-width: 680px;
-    padding: 10px 24px 60px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 6px;
-  }
-  .page-subtitle {
-    color: var(--text-muted);
-    font-size: 15px;
-    margin-bottom: 36px;
-    line-height: 1.5;
-  }
-
-  .card {
-    background: var(--bg-card);
-    border-radius: var(--radius);
-    padding: 36px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .section-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.6px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .field {
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-  label .required {
-    color: var(--accent);
-    margin-left: 2px;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    background: #fff;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-  }
-  input:focus, select:focus {
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(26,58,92,0.08);
-  }
-  input.autofilled {
-    background: var(--success-bg);
-    border-color: var(--success);
-    animation: fillPulse 0.5s ease;
-  }
-  @keyframes fillPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.005); }
-    100% { transform: scale(1); }
-  }
-  input[readonly] {
-    background: #f9f9f7;
-    color: var(--text-muted);
-    cursor: default;
-  }
-
-  .search-wrapper {
-    position: relative;
-  }
-  .search-wrapper input {
-    padding-right: 44px;
-  }
-  .search-icon {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    pointer-events: none;
-  }
-  .spinner {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px; height: 20px;
-    border: 2px solid var(--border);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: none;
-  }
-  @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
-
-  .autocomplete-list {
-    position: absolute;
-    top: 100%;
-    left: 0; right: 0;
-    background: #fff;
-    border: 1.5px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    max-height: 280px;
-    overflow-y: auto;
-    z-index: 100;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    display: none;
-  }
-  .autocomplete-list.visible { display: block; }
-
-  .autocomplete-item {
-    padding: 12px 14px;
-    cursor: pointer;
-    border-bottom: 1px solid #f3f0eb;
-    transition: background 0.15s;
-  }
-  .autocomplete-item:last-child { border-bottom: none; }
-  .autocomplete-item:hover, .autocomplete-item.active {
-    background: #f5f2ed;
-  }
-  .autocomplete-item .company-name {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 2px;
-    color: var(--primary);
-  }
-  .autocomplete-item .company-detail {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-  .autocomplete-item .company-detail .siret-tag {
-    background: rgba(26,58,92,0.08);
-    padding: 1px 6px;
-    border-radius: 3px;
-    font-size: 11px;
-    font-weight: 500;
-    margin-right: 6px;
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .row-3 {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 16px;
-  }
-
-  .info-banner {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 14px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 24px;
-  }
-  .info-banner.info {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    color: #1e40af;
-  }
-  .info-banner.success {
-    background: var(--success-bg);
-    border: 1px solid #bbf7d0;
-    color: #166534;
-    display: none;
-  }
-  .info-banner.error {
-    background: var(--error-bg);
-    border: 1px solid #fecaca;
-    color: var(--error);
-    display: none;
-  }
-  .info-banner svg { flex-shrink: 0; margin-top: 1px; }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 28px 0;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-left: 8px;
-  }
-  .badge.auto {
-    background: rgba(22,128,60,0.1);
-    color: var(--success);
-  }
-
-  /* Source tag */
-  .source-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 8px;
-    padding: 4px 10px;
-    background: #f9f9f7;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-  .source-tag svg { opacity: 0.5; }
-
-  button.submit-btn {
-    width: 100%;
-    padding: 14px 28px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    margin-top: 8px;
-    letter-spacing: 0.2px;
-  }
-  button.submit-btn:hover {
-    background: var(--primary-light);
-  }
-  button.submit-btn:active {
-    transform: scale(0.995);
-  }
-
-  .terms {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 16px;
-    line-height: 1.5;
-  }
-  .terms a {
-    color: var(--primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .no-results {
-    padding: 16px;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 13px;
-  }
-
-  @media (max-width: 600px) {
-    main { padding: 10px 16px 40px; }
-    .card { padding: 24px 20px; }
-    .row, .row-3 { grid-template-columns: 1fr; }
-    .page-title { font-size: 26px; }
-    header { padding: 20px 20px; }
-  }
+:root{--bg:#f5f2ed;--bg-card:#fff;--primary:#1a3a5c;--primary-light:#2d5f8a;--accent:#c7552e;--text:#1e1e1e;--text-muted:#6b7280;--border:#ddd6cc;--border-focus:#1a3a5c;--success:#16803c;--success-bg:#ecfdf5;--error:#dc2626;--error-bg:#fef2f2;--opqibi:#0e6e3f;--opqibi-bg:#f0faf5;--shadow-lg:0 10px 40px rgba(0,0,0,.08);--radius:10px;--radius-sm:6px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center}
+body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,58,92,.04) 0%,transparent 70%);pointer-events:none}
+body::after{content:'';position:fixed;bottom:-300px;left:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(199,85,46,.04) 0%,transparent 70%);pointer-events:none}
+header{width:100%;padding:28px 40px;display:flex;align-items:center;gap:14px}
+.logo-mark{width:38px;height:38px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;font-family:'Playfair Display',serif}
+.logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary)}
+main{width:100%;max-width:720px;padding:10px 24px 60px;position:relative;z-index:1}
+.page-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--primary);margin-bottom:6px}
+.page-subtitle{color:var(--text-muted);font-size:15px;margin-bottom:36px;line-height:1.5}
+.card{background:var(--bg-card);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.04)}
+.section-label{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;font-weight:600;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-label.opqibi-label{color:var(--opqibi)}
+.field{margin-bottom:20px;position:relative}
+label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px}
+label .req{color:var(--accent);margin-left:2px}
+input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none}
+input:focus{border-color:var(--border-focus);box-shadow:0 0 0 3px rgba(26,58,92,.08)}
+input.af{background:var(--success-bg);border-color:var(--success);animation:fp .5s ease}
+@keyframes fp{0%{transform:scale(1)}50%{transform:scale(1.005)}100%{transform:scale(1)}}
+input[readonly]{background:#f9f9f7;color:var(--text-muted);cursor:default}
+.sw{position:relative}.sw input{padding-right:44px}
+.si{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
+.sp{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;display:none}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+.al{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);max-height:280px;overflow-y:auto;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.1);display:none}
+.al.v{display:block}
+.ai{padding:12px 14px;cursor:pointer;border-bottom:1px solid #f3f0eb;transition:background .15s}
+.ai:last-child{border-bottom:none}.ai:hover,.ai.act{background:#f5f2ed}
+.cn{font-weight:600;font-size:14px;margin-bottom:2px;color:var(--primary)}
+.cd{font-size:12px;color:var(--text-muted)}
+.st{background:rgba(26,58,92,.08);padding:1px 6px;border-radius:3px;font-size:11px;font-weight:500;margin-right:6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.ra{display:grid;grid-template-columns:1fr 2fr;gap:16px}
+.ib{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:var(--radius-sm);font-size:13px;line-height:1.5;margin-bottom:24px}
+.ib.inf{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.ib.suc{background:var(--success-bg);border:1px solid #bbf7d0;color:#166534;display:none}
+.ib.err{background:var(--error-bg);border:1px solid #fecaca;color:var(--error);display:none}
+.ib svg{flex-shrink:0;margin-top:1px}
+.div{height:1px;background:var(--border);margin:28px 0}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;margin-left:8px;background:rgba(22,128,60,.1);color:var(--success)}
+.srctag{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);margin-top:8px;padding:4px 10px;background:#f9f9f7;border-radius:4px;border:1px solid var(--border)}
+.ob{background:var(--opqibi-bg);border:1.5px solid rgba(14,110,63,.2);border-radius:var(--radius);padding:24px;display:none}
+.ob.v{display:block}
+.oh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ol{width:44px;height:44px;background:var(--opqibi);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:10px;letter-spacing:.5px;line-height:1}
+.ot{font-weight:600;font-size:15px;color:var(--opqibi)}
+.os{font-size:12px;color:var(--text-muted)}
+.ocn{display:inline-flex;align-items:center;gap:6px;background:#fff;padding:6px 12px;border-radius:6px;font-size:13px;font-weight:600;color:var(--opqibi);border:1px solid rgba(14,110,63,.2);margin-bottom:16px}
+.ql{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.qt{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:5px;font-size:12px;font-weight:500;background:#fff;border:1px solid rgba(14,110,63,.15);color:var(--text);transition:all .15s}
+.qt:hover{border-color:var(--opqibi);background:rgba(14,110,63,.04)}
+.qc{font-weight:700;color:var(--opqibi);font-size:11px}
+.qr{background:#fef3c7;color:#92400e;font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;margin-left:2px}
+.onf{padding:14px;text-align:center;font-size:13px;color:var(--text-muted);background:#fff;border-radius:6px;border:1px dashed rgba(14,110,63,.2)}
+.osr{display:flex;align-items:center;gap:8px;padding:14px;font-size:13px;color:var(--opqibi)}
+.ms{width:16px;height:16px;border:2px solid rgba(14,110,63,.2);border-top-color:var(--opqibi);border-radius:50%;animation:spin .7s linear infinite}
+.olk{display:inline-flex;align-items:center;gap:5px;color:var(--opqibi);font-size:12px;font-weight:500;text-decoration:none;margin-top:12px;padding:6px 10px;border-radius:4px;transition:background .15s}
+.olk:hover{background:rgba(14,110,63,.06);text-decoration:underline}
+.sbtn{width:100%;padding:14px 28px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s,transform .1s;margin-top:8px}
+.sbtn:hover{background:var(--primary-light)}.sbtn:active{transform:scale(.995)}
+.terms{text-align:center;font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.5}
+.terms a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}
+.nr{padding:16px;text-align:center;color:var(--text-muted);font-size:13px}
+@media(max-width:640px){main{padding:10px 16px 40px}.card{padding:24px 20px}.row,.r3,.ra{grid-template-columns:1fr}.page-title{font-size:26px}header{padding:20px}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo-mark">EP</div>
-  <div class="logo-text">Espace Pro</div>
-</header>
-
+<header><div class="logo-mark">EP</div><div class="logo-text">Espace Pro</div></header>
 <main>
-  <h1 class="page-title">Créer votre compte</h1>
-  <p class="page-subtitle">Recherchez votre entreprise pour préremplir automatiquement vos informations depuis l'annuaire officiel des entreprises françaises.</p>
+<h1 class="page-title">Créer votre compte</h1>
+<p class="page-subtitle">Recherchez votre entreprise pour préremplir automatiquement vos informations et vérifier vos certifications OPQIBI.</p>
+<div class="card">
 
-  <div class="card">
+<!-- SEARCH -->
+<div class="section-label">Votre entreprise</div>
+<div class="ib inf" id="infB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>Saisissez le nom, le SIRET ou le SIREN. Les données seront récupérées automatiquement.</span></div>
+<div class="ib suc" id="sucB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span id="sucT"></span></div>
+<div class="ib err" id="errB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span id="errT"></span></div>
 
-    <!-- SECTION 1 -->
-    <div class="section-label">Votre entreprise</div>
+<div class="field"><label for="q">Nom de l'entreprise ou SIRET <span class="req">*</span></label>
+<div class="sw"><input type="text" id="q" placeholder="Ex : Manergy, 328 581 822..." autocomplete="off">
+<svg class="si" id="sIc" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+<div class="sp" id="sp"></div><div class="al" id="acl"></div></div>
+<div class="srctag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Source : API Sirene — données officielles INSEE</div></div>
 
-    <div class="info-banner info" id="infoBanner">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <span>Saisissez le nom, le SIRET ou le SIREN de votre entreprise. Les données seront récupérées automatiquement depuis la base Sirene officielle.</span>
-    </div>
+<div class="div"></div>
 
-    <div class="info-banner success" id="successBanner">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      <span id="successText"></span>
-    </div>
+<!-- LEGAL -->
+<div class="section-label">Informations légales <span class="badge" id="ab" style="display:none">✓ Auto-rempli</span></div>
+<div class="field"><label>Dénomination sociale</label><input type="text" id="denom" readonly placeholder="—"></div>
+<div class="r3">
+<div class="field"><label>SIRET</label><input type="text" id="siret" readonly placeholder="—"></div>
+<div class="field"><label>SIREN</label><input type="text" id="siren" readonly placeholder="—"></div>
+<div class="field"><label>N° TVA intracommunautaire</label><input type="text" id="tva" readonly placeholder="—"></div>
+</div>
+<div class="r3">
+<div class="field"><label>Code NAF / APE</label><input type="text" id="naf" readonly placeholder="—"></div>
+<div class="field"><label>Forme juridique</label><input type="text" id="fj" readonly placeholder="—"></div>
+<div class="field"><label>Date de création</label><input type="text" id="dc" readonly placeholder="—"></div>
+</div>
 
-    <div class="info-banner error" id="errorBanner">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-      <span id="errorText"></span>
-    </div>
+<div class="div"></div>
 
-    <div class="field">
-      <label for="searchEntreprise">Nom de l'entreprise ou SIRET <span class="required">*</span></label>
-      <div class="search-wrapper">
-        <input type="text" id="searchEntreprise" placeholder="Ex : Dassault Systèmes, 443 061 841..." autocomplete="off">
-        <svg class="search-icon" id="searchIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <div class="spinner" id="spinner"></div>
-        <div class="autocomplete-list" id="autocompleteList"></div>
-      </div>
-      <div class="source-tag">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Source : API Sirene — données officielles INSEE
-      </div>
-    </div>
+<!-- ADDRESS -->
+<div class="section-label">Adresse du siège <span class="badge" id="ab2" style="display:none">✓ Auto-rempli</span></div>
+<div class="field"><label>Adresse</label><input type="text" id="addr" readonly placeholder="—"></div>
+<div class="ra">
+<div class="field"><label>Code postal</label><input type="text" id="cp" readonly placeholder="—"></div>
+<div class="field"><label>Ville</label><input type="text" id="ville" readonly placeholder="—"></div>
+</div>
 
-    <div class="divider"></div>
+<div class="div"></div>
 
-    <!-- SECTION 2 -->
-    <div class="section-label">Informations légales <span class="badge auto" id="autoBadge" style="display:none;">✓ Auto-rempli</span></div>
+<!-- OPQIBI -->
+<div class="section-label opqibi-label">Certifications OPQIBI</div>
+<div id="oz"><div class="onf"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sélectionnez une entreprise pour vérifier ses certifications OPQIBI</div></div>
 
-    <div class="field">
-      <label for="denomination">Dénomination sociale</label>
-      <input type="text" id="denomination" readonly placeholder="—">
-    </div>
+<div class="div"></div>
 
-    <div class="row">
-      <div class="field">
-        <label for="siret">SIRET (14 chiffres)</label>
-        <input type="text" id="siret" readonly placeholder="—">
-      </div>
-      <div class="field">
-        <label for="siren">SIREN (9 chiffres)</label>
-        <input type="text" id="siren" readonly placeholder="—">
-      </div>
-    </div>
+<!-- CONTACT -->
+<div class="section-label">Vos coordonnées</div>
+<div class="row">
+<div class="field"><label>Prénom <span class="req">*</span></label><input type="text" id="prenom" placeholder="Jean"></div>
+<div class="field"><label>Nom <span class="req">*</span></label><input type="text" id="nom" placeholder="Dupont"></div>
+</div>
+<div class="field"><label>Adresse e-mail <span class="req">*</span></label><input type="email" id="email" placeholder="jean.dupont@entreprise.fr"></div>
+<div class="field"><label>Téléphone</label><input type="tel" id="tel" placeholder="06 12 34 56 78"></div>
+<div class="field"><label>Mot de passe <span class="req">*</span></label><input type="password" id="pwd" placeholder="Minimum 8 caractères"></div>
 
-    <div class="row">
-      <div class="field">
-        <label for="naf">Code NAF / APE</label>
-        <input type="text" id="naf" readonly placeholder="—">
-      </div>
-      <div class="field">
-        <label for="formeJuridique">Forme juridique</label>
-        <input type="text" id="formeJuridique" readonly placeholder="—">
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- SECTION 3 -->
-    <div class="section-label">Adresse du siège <span class="badge auto" id="autoBadgeAddr" style="display:none;">✓ Auto-rempli</span></div>
-
-    <div class="field">
-      <label for="adresse">Adresse</label>
-      <input type="text" id="adresse" readonly placeholder="—">
-    </div>
-
-    <div class="row-3">
-      <div class="field">
-        <label for="codePostal">Code postal</label>
-        <input type="text" id="codePostal" readonly placeholder="—">
-      </div>
-      <div class="field">
-        <label for="ville">Ville</label>
-        <input type="text" id="ville" readonly placeholder="—">
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- SECTION 4 -->
-    <div class="section-label">Vos coordonnées</div>
-
-    <div class="row">
-      <div class="field">
-        <label for="prenom">Prénom <span class="required">*</span></label>
-        <input type="text" id="prenom" placeholder="Jean">
-      </div>
-      <div class="field">
-        <label for="nom">Nom <span class="required">*</span></label>
-        <input type="text" id="nom" placeholder="Dupont">
-      </div>
-    </div>
-
-    <div class="field">
-      <label for="email">Adresse e-mail <span class="required">*</span></label>
-      <input type="email" id="email" placeholder="jean.dupont@entreprise.fr">
-    </div>
-
-    <div class="field">
-      <label for="telephone">Téléphone</label>
-      <input type="tel" id="telephone" placeholder="06 12 34 56 78">
-    </div>
-
-    <div class="field">
-      <label for="password">Mot de passe <span class="required">*</span></label>
-      <input type="password" id="password" placeholder="Minimum 8 caractères">
-    </div>
-
-    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Créer mon compte</button>
-
-    <p class="terms">En vous inscrivant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
-  </div>
+<button class="sbtn" onclick="doSubmit()">Créer mon compte</button>
+<p class="terms">En vous inscrivant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
+</div>
 </main>
 
 <script>
-  const searchInput = document.getElementById('searchEntreprise');
-  const autocompleteList = document.getElementById('autocompleteList');
-  const spinner = document.getElementById('spinner');
-  const searchIcon = document.getElementById('searchIcon');
-  const successBanner = document.getElementById('successBanner');
-  const errorBanner = document.getElementById('errorBanner');
-  const infoBanner = document.getElementById('infoBanner');
-  const autoBadge = document.getElementById('autoBadge');
-  const autoBadgeAddr = document.getElementById('autoBadgeAddr');
+const E=id=>document.getElementById(id);
+let dt,ai=-1,cr=[];
 
-  let debounceTimer;
-  let activeIndex = -1;
-  let currentResults = [];
+// --- SIRENE SEARCH ---
+async function doSearch(q){
+  if(!q||q.length<2){E('acl').classList.remove('v');return}
+  E('sp').style.display='block';E('sIc').style.display='none';E('errB').style.display='none';
+  try{
+    const r=await fetch('https://recherche-entreprises.api.gouv.fr/search?q='+encodeURIComponent(q)+'&page=1&per_page=8');
+    if(!r.ok)throw 0;cr=(await r.json()).results||[];showAC(cr);
+  }catch{E('acl').innerHTML='<div class="nr">Erreur de connexion.</div>';E('acl').classList.add('v')}
+  finally{E('sp').style.display='none';E('sIc').style.display='block'}
+}
 
-  /* ─── API Recherche Entreprises (gouv.fr) ─────────────────── */
-  async function searchEntreprise(query) {
-    if (!query || query.length < 2) {
-      autocompleteList.classList.remove('visible');
-      return;
-    }
-    spinner.style.display = 'block';
-    searchIcon.style.display = 'none';
-    errorBanner.style.display = 'none';
+function showAC(res){
+  const l=E('acl');
+  if(!res.length){l.innerHTML='<div class="nr">Aucune entreprise trouvée.</div>';l.classList.add('v');return}
+  l.innerHTML=res.map((r,i)=>{
+    const s=r.siege||{},n=r.nom_complet||r.nom_raison_sociale||'—',loc=[s.code_postal,s.libelle_commune].filter(Boolean).join(' ');
+    return '<div class="ai" onclick="pick('+i+')"><div class="cn">'+hl(n,E('q').value)+'</div><div class="cd"><span class="st">SIRET '+(s.siret||'—')+'</span>'+loc+'</div></div>';
+  }).join('');
+  l.classList.add('v');ai=-1;
+}
 
-    try {
-      const url = `https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(query)}&page=1&per_page=8`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Erreur API');
-      const data = await res.json();
-      currentResults = data.results || [];
-      renderAutocomplete(currentResults);
-    } catch (err) {
-      autocompleteList.innerHTML = '<div class="no-results">Erreur de connexion. Vérifiez votre accès internet.</div>';
-      autocompleteList.classList.add('visible');
-    } finally {
-      spinner.style.display = 'none';
-      searchIcon.style.display = 'block';
-    }
+function hl(t,q){return q?t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<strong>$1</strong>'):t}
+
+// --- TVA ---
+function tva(siren){
+  if(!siren||siren.length!==9)return '—';
+  const k=(12+3*(parseInt(siren,10)%97))%97;
+  return 'FR '+String(k).padStart(2,'0')+' '+siren;
+}
+
+// --- FORME JURIDIQUE ---
+const FJ={'1000':'Entrepreneur individuel','5410':'SARL','5499':'EURL','5505':'SA','5510':'SA','5599':'SA à directoire','5710':'SAS','5720':'SASU','6540':'SCI','6599':'Société civile','9220':'Association déclarée','9221':"Association reconnue d'utilité publique"};
+function gfj(code){
+  if(!code)return '—';if(FJ[code])return FJ[code]+' ('+code+')';const c=+code;
+  if(c>=1000&&c<2000)return 'Entrepreneur individuel ('+code+')';
+  if(c>=5410&&c<=5499)return 'SARL ('+code+')';if(c>=5500&&c<=5599)return 'SA ('+code+')';
+  if(c>=5700&&c<=5720)return 'SAS ('+code+')';if(c>=6500&&c<=6599)return 'Société civile ('+code+')';
+  if(c>=9200&&c<=9299)return 'Association ('+code+')';if(c>=7000&&c<=7999)return 'Personne morale de droit public ('+code+')';
+  return 'Code '+code;
+}
+
+// --- OPQIBI ---
+async function findOPQIBI(siren,nom){
+  const z=E('oz');
+  z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">Vérification OPQIBI</div><div class="os">Recherche des certifications...</div></div></div><div class="osr"><div class="ms"></div> Recherche en cours sur l\'annuaire OPQIBI...</div></div>';
+  try{
+    const px=u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u);
+    const html=await(await fetch(px('https://www.opqibi.com/recherche-resultat?Siren='+siren))).text();
+    const doc=new DOMParser().parseFromString(html,'text/html');
+    const lks=doc.querySelectorAll('a[href*="/fiche/"]');
+    if(!lks.length){opRes('none',nom,siren);return}
+    const fid=lks[0].getAttribute('href').match(/\/fiche\/(\d+)/)?.[1];
+    if(!fid){opRes('none',nom,siren);return}
+    const fh=await(await fetch(px('https://www.opqibi.com/fiche/'+fid))).text();
+    const fd=new DOMParser().parseFromString(fh,'text/html');
+    const cm=fd.body.textContent.match(/(\d{2}\s+\d{2}\s+\d{4})/);
+    const cn=cm?cm[1].trim():'';
+    const qs=[];
+    fd.querySelectorAll('table tr').forEach(r=>{
+      const c=r.querySelectorAll('td');
+      if(c.length>=2){const co=c[0]?.textContent?.trim(),lb=c[1]?.textContent?.trim();
+      if(co&&/^\d{4}$/.test(co)){qs.push({co,lb,rge:(lb+(c[1]?.innerHTML||'')).toLowerCase().includes('rge')})}}
+    });
+    if(qs.length)opRes('found',nom,siren,fid,cn,qs);else opRes('partial',nom,siren,fid,cn);
+  }catch(e){console.error(e);opRes('error',nom,siren)}
+}
+
+function opRes(type,nom,siren,fid,cn,qs){
+  const z=E('oz');
+  const es='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  const ss='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+  const ct=cn?'<div class="ocn">'+ss+'Certificat n° '+cn+'</div>':'';
+  if(type==='found'){
+    const qh=qs.map(q=>'<div class="qt"><span class="qc">'+q.co+'</span>'+q.lb+(q.rge?'<span class="qr">RGE</span>':'')+'</div>').join('');
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">✓ Entreprise certifiée OPQIBI</div><div class="os">'+nom+'</div></div></div>'+ct+'<div style="font-size:13px;font-weight:500;margin-bottom:4px">'+qs.length+' qualification(s) :</div><div class="ql">'+qh+'</div><a href="https://www.opqibi.com/fiche/'+fid+'" target="_blank" rel="noopener" class="olk">'+es+'Voir la fiche complète sur opqibi.com</a></div>';
+  }else if(type==='partial'){
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol">OPQIBI</div><div><div class="ot">✓ Entreprise référencée OPQIBI</div><div class="os">'+nom+'</div></div></div>'+ct+'<p style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Consultez la fiche pour les qualifications détaillées.</p><a href="https://www.opqibi.com/fiche/'+fid+'" target="_blank" rel="noopener" class="olk">'+es+'Voir la fiche complète sur opqibi.com</a></div>';
+  }else if(type==='none'){
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol" style="background:#94a3b8">OPQIBI</div><div><div class="ot" style="color:var(--text-muted)">Aucune certification OPQIBI</div><div class="os">'+nom+' (SIREN: '+siren+')</div></div></div><p style="font-size:13px;color:var(--text-muted)">Cette entreprise n\'est pas référencée dans l\'annuaire OPQIBI.</p><a href="https://www.opqibi.com/recherche-plus" target="_blank" rel="noopener" class="olk" style="color:var(--text-muted)">'+es+'Rechercher manuellement sur opqibi.com</a></div>';
+  }else{
+    z.innerHTML='<div class="ob v"><div class="oh"><div class="ol" style="background:#f59e0b">OPQIBI</div><div><div class="ot" style="color:#b45309">Vérification impossible</div><div class="os">Le site OPQIBI n\'a pas pu être interrogé.</div></div></div><p style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Vérifiez manuellement :</p><a href="https://www.opqibi.com/recherche-plus" target="_blank" rel="noopener" class="olk" style="color:#b45309">'+es+'Rechercher sur opqibi.com (SIREN: '+siren+')</a></div>';
   }
+}
 
-  /* ─── Autocomplete rendering ──────────────────────────────── */
-  function renderAutocomplete(results) {
-    if (!results.length) {
-      autocompleteList.innerHTML = '<div class="no-results">Aucune entreprise trouvée. Essayez avec le SIRET ou un autre nom.</div>';
-      autocompleteList.classList.add('visible');
-      return;
-    }
-    autocompleteList.innerHTML = results.map((r, i) => {
-      const siege = r.siege || {};
-      const nom = r.nom_complet || r.nom_raison_sociale || '—';
-      const siret = siege.siret || '—';
-      const ville = siege.libelle_commune || '';
-      const cp = siege.code_postal || '';
-      const loc = [cp, ville].filter(Boolean).join(' ');
-      return `
-        <div class="autocomplete-item" data-index="${i}" onclick="selectEntreprise(${i})">
-          <div class="company-name">${hl(nom, searchInput.value)}</div>
-          <div class="company-detail"><span class="siret-tag">SIRET ${siret}</span>${loc}</div>
-        </div>`;
-    }).join('');
-    autocompleteList.classList.add('visible');
-    activeIndex = -1;
-  }
+// --- SELECT ---
+function pick(i){
+  const r=cr[i];if(!r)return;
+  const s=r.siege||{},nom=r.nom_complet||r.nom_raison_sociale||'',sir=r.siren||'';
+  E('q').value=nom;E('acl').classList.remove('v');
+  const adr=[s.numero_voie,s.type_voie,s.libelle_voie,s.complement_adresse].filter(Boolean).join(' ')||s.geo_adresse||'—';
+  const nc=s.activite_principale||r.activite_principale||'',nl=s.libelle_activite_principale||'';
+  const dcv=r.date_creation||s.date_creation||'';
+  const flds={denom:nom,siret:s.siret||'—',siren:sir||'—',tva:tva(sir),naf:nc?(nl?nc+' — '+nl:nc):'—',fj:gfj(r.nature_juridique),dc:dcv?new Date(dcv).toLocaleDateString('fr-FR'):'—',addr:adr,cp:s.code_postal||'—',ville:s.libelle_commune||'—'};
+  let d=0;
+  for(const[id,v]of Object.entries(flds)){setTimeout(()=>{const el=E(id);el.value=v;el.classList.add('af');setTimeout(()=>el.classList.remove('af'),1500)},d);d+=60}
+  E('infB').style.display='none';E('errB').style.display='none';
+  E('sucB').style.display='flex';E('sucT').textContent='✓ '+nom+' — Informations préremplies avec succès.';
+  E('ab').style.display='inline-flex';E('ab2').style.display='inline-flex';
+  if(sir)findOPQIBI(sir,nom);
+}
 
-  function hl(text, q) {
-    if (!q) return text;
-    const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
-    return text.replace(re, '<strong>$1</strong>');
-  }
+// --- EVENTS ---
+E('q').addEventListener('input',e=>{const v=e.target.value.trim();clearTimeout(dt);if(v.length<2){E('acl').classList.remove('v');return}dt=setTimeout(()=>doSearch(v),300)});
+E('q').addEventListener('keydown',e=>{
+  const items=E('acl').querySelectorAll('.ai');if(!items.length)return;
+  if(e.key==='ArrowDown'){e.preventDefault();ai=Math.min(ai+1,items.length-1);uai(items)}
+  else if(e.key==='ArrowUp'){e.preventDefault();ai=Math.max(ai-1,0);uai(items)}
+  else if(e.key==='Enter'&&ai>=0){e.preventDefault();pick(ai)}
+  else if(e.key==='Escape')E('acl').classList.remove('v');
+});
+function uai(items){items.forEach(i=>i.classList.remove('act'));if(items[ai]){items[ai].classList.add('act');items[ai].scrollIntoView({block:'nearest'})}}
+document.addEventListener('click',e=>{if(!e.target.closest('.sw'))E('acl').classList.remove('v')});
 
-  /* ─── Formes juridiques ───────────────────────────────────── */
-  const FJ = {
-    '1000':'Entrepreneur individuel','5410':'SARL','5499':'EURL',
-    '5505':'SA à conseil d\'administration','5510':'SA à conseil d\'administration',
-    '5599':'SA à directoire','5710':'SAS','5720':'SASU',
-    '6540':'SCI','6599':'Société civile',
-    '9220':'Association déclarée','9221':'Association reconnue d\'utilité publique',
-  };
-  function getFormeJuridique(code) {
-    if (!code) return '—';
-    if (FJ[code]) return FJ[code] + ` (${code})`;
-    const c = parseInt(code);
-    if (c >= 1000 && c < 2000) return `Entrepreneur individuel (${code})`;
-    if (c >= 5410 && c <= 5499) return `SARL (${code})`;
-    if (c >= 5500 && c <= 5599) return `SA (${code})`;
-    if (c >= 5700 && c <= 5720) return `SAS (${code})`;
-    if (c >= 6500 && c <= 6599) return `Société civile (${code})`;
-    if (c >= 9200 && c <= 9299) return `Association (${code})`;
-    if (c >= 7000 && c <= 7999) return `Personne morale de droit public (${code})`;
-    return `Code ${code}`;
-  }
-
-  /* ─── Select & autofill ───────────────────────────────────── */
-  function selectEntreprise(index) {
-    const r = currentResults[index];
-    if (!r) return;
-    const siege = r.siege || {};
-    const nom = r.nom_complet || r.nom_raison_sociale || '';
-    searchInput.value = nom;
-    autocompleteList.classList.remove('visible');
-
-    const adresseParts = [];
-    if (siege.numero_voie) adresseParts.push(siege.numero_voie);
-    if (siege.type_voie) adresseParts.push(siege.type_voie);
-    if (siege.libelle_voie) adresseParts.push(siege.libelle_voie);
-    if (siege.complement_adresse) adresseParts.push(siege.complement_adresse);
-    const adresseStr = adresseParts.join(' ') || siege.geo_adresse || '—';
-
-    const nafCode = siege.activite_principale || r.activite_principale || '';
-    const nafLabel = siege.libelle_activite_principale || '';
-    const nafFull = nafCode ? (nafLabel ? `${nafCode} — ${nafLabel}` : nafCode) : '—';
-
-    const fields = {
-      denomination: nom,
-      siret: siege.siret || '—',
-      siren: r.siren || '—',
-      naf: nafFull,
-      formeJuridique: getFormeJuridique(r.nature_juridique),
-      adresse: adresseStr,
-      codePostal: siege.code_postal || '—',
-      ville: siege.libelle_commune || '—',
-    };
-
-    let delay = 0;
-    for (const [id, value] of Object.entries(fields)) {
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        el.value = value;
-        el.classList.add('autofilled');
-        setTimeout(() => el.classList.remove('autofilled'), 1500);
-      }, delay);
-      delay += 80;
-    }
-
-    infoBanner.style.display = 'none';
-    errorBanner.style.display = 'none';
-    successBanner.style.display = 'flex';
-    document.getElementById('successText').textContent = `✓ ${nom} — Les informations ont été préremplies automatiquement.`;
-    autoBadge.style.display = 'inline-flex';
-    autoBadgeAddr.style.display = 'inline-flex';
-  }
-
-  /* ─── Events ──────────────────────────────────────────────── */
-  searchInput.addEventListener('input', (e) => {
-    const q = e.target.value.trim();
-    clearTimeout(debounceTimer);
-    if (q.length < 2) { autocompleteList.classList.remove('visible'); return; }
-    debounceTimer = setTimeout(() => searchEntreprise(q), 300);
-  });
-
-  searchInput.addEventListener('keydown', (e) => {
-    const items = autocompleteList.querySelectorAll('.autocomplete-item');
-    if (!items.length) return;
-    if (e.key === 'ArrowDown') { e.preventDefault(); activeIndex = Math.min(activeIndex+1, items.length-1); upd(items); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIndex = Math.max(activeIndex-1, 0); upd(items); }
-    else if (e.key === 'Enter' && activeIndex >= 0) { e.preventDefault(); selectEntreprise(activeIndex); }
-    else if (e.key === 'Escape') autocompleteList.classList.remove('visible');
-  });
-
-  function upd(items) {
-    items.forEach(i => i.classList.remove('active'));
-    if (items[activeIndex]) { items[activeIndex].classList.add('active'); items[activeIndex].scrollIntoView({block:'nearest'}); }
-  }
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.search-wrapper')) autocompleteList.classList.remove('visible');
-  });
-
-  function handleSubmit() {
-    const req = ['searchEntreprise','prenom','nom','email','password'];
-    let ok = true;
-    for (const id of req) {
-      const el = document.getElementById(id);
-      if (!el.value.trim()) { el.style.borderColor='var(--error)'; ok=false; setTimeout(()=>{el.style.borderColor='';},2000); }
-    }
-    if (!ok) {
-      errorBanner.style.display = 'flex';
-      document.getElementById('errorText').textContent = 'Veuillez remplir tous les champs obligatoires.';
-      return;
-    }
-    alert('Inscription envoyée avec succès ! (démo)');
-  }
+function doSubmit(){
+  const req=['q','prenom','nom','email','pwd'];let ok=true;
+  for(const id of req){const el=E(id);if(!el.value.trim()){el.style.borderColor='var(--error)';ok=false;setTimeout(()=>el.style.borderColor='',2000)}}
+  if(!ok){E('errB').style.display='flex';E('errT').textContent='Veuillez remplir tous les champs obligatoires.';return}
+  alert('Inscription envoyée avec succès ! (démo)');
+}
 </script>
-
 </body>
 </html>
