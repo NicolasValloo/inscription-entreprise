@@ -8,24 +8,24 @@ export async function onRequestGet(context) {
   };
 
   if (!target) {
-    return new Response('Missing ?url= parameter', {
+    return new Response(JSON.stringify({ error: 'Missing ?url= parameter' }), {
       status: 400,
-      headers: corsHeaders,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 
   try {
     const u = new URL(target);
     if (!u.hostname.endsWith('opqibi.com')) {
-      return new Response('Only opqibi.com is allowed', {
+      return new Response(JSON.stringify({ error: 'Only opqibi.com is allowed' }), {
         status: 403,
-        headers: corsHeaders,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
   } catch {
-    return new Response('Invalid URL', {
+    return new Response(JSON.stringify({ error: 'Invalid URL' }), {
       status: 400,
-      headers: corsHeaders,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 
@@ -41,20 +41,20 @@ export async function onRequestGet(context) {
 
     const body = await response.text();
 
-    // Return 200 with the body, even if OPQIBI returned 401
-    // Remove WWW-Authenticate header to prevent browser auth popup
-    return new Response(body, {
+    // Return as JSON to prevent browser from loading sub-resources
+    // and triggering auth popups
+    return new Response(JSON.stringify({ html: body, status: response.status }), {
       status: 200,
       headers: {
         ...corsHeaders,
-        'Content-Type': 'text/html; charset=utf-8',
+        'Content-Type': 'application/json; charset=utf-8',
         'Cache-Control': 'public, max-age=3600',
       },
     });
   } catch (err) {
-    return new Response('Fetch failed: ' + err.message, {
+    return new Response(JSON.stringify({ error: 'Fetch failed: ' + err.message }), {
       status: 502,
-      headers: corsHeaders,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 }
